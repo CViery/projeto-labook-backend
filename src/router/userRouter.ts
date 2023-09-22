@@ -3,8 +3,8 @@ import { UserBusiness } from "../business/UserBusiness"
 import { UserController } from "../controller/UserController"
 import { UserDatabase } from "../database/UserDatabase"
 import { IdGenerator } from '../services/IdGenerator'
-import { TokenMenanger } from '../services/TokenMenager'
-import { HashManager } from '../services/HashManeger'
+import { TokenMananger } from '../services/TokenManager'
+import { HashManager } from '../services/HashManager'
 
 export const userRouter = express.Router()
 
@@ -12,7 +12,7 @@ const userController = new UserController(
     new UserBusiness(
         new UserDatabase(),
         new IdGenerator(),
-        new TokenMenanger(),
+        new TokenMananger(),
         new HashManager()
     )
 )

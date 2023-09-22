@@ -5,15 +5,15 @@ import { PostDatabase } from "../database/PostDatabase";
 
 import { IdGenerator } from "../services/IdGenerator";
 import { UserDatabase } from "../database/UserDatabase";
-import { TokenMenanger } from '../services/TokenMenager';
-import { PostBusiness } from '../business/PostBusinness';
+import { TokenMananger } from '../services/TokenManager';
+import { PostBusiness } from '../business/PostBusiness';
 
 export const postRouter = express.Router()
 const postController = new PostController(
     new PostBusiness(
         new UserDatabase(),
         new PostDatabase(),
-        new TokenMenanger(),
+        new TokenMananger(),
         new IdGenerator()
     )
 );

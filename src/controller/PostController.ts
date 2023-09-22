@@ -3,12 +3,12 @@ import { Response, Request } from "express";
 
 import { BaseError } from "../errors/BaseError";
 import { ZodError } from "zod";
-import { PostBusiness } from '../business/PostBusinness';
-import { GetPostsOutputDTO, GetPostsSchema } from '../dtos/post/getPosts.dto';
-import { CreatePostSchema } from '../dtos/post/cretePost.dto';
-import { EditPostSchema } from '../dtos/post/editPost.dto';
-import { DeletePostSchema } from '../dtos/post/deletePost.dto';
-import { LikeDislikeSchema } from '../dtos/post/likeDislike.dto';
+import { PostBusiness } from '../business/PostBusiness';
+import { GetPostsOutputDTO, GetPostsSchema } from '../dtos/poust/getPost.dto';
+import { CreatePostSchema } from '../dtos/poust/createPost.dto';
+import { EditPostSchema } from '../dtos/poust/editPost.dto';
+import { DeletePostSchema } from '../dtos/poust/deletePost.dto';
+import { LikeDislikeSchema } from '../dtos/poust/likeDislike.dto';
 
 export class PostController{
     constructor(
@@ -29,7 +29,7 @@ export class PostController{
           if (error instanceof BaseError) {
             res.status(error.statusCode).send(error.message)
           } else if (error instanceof ZodError) {
-            res.status(400).send(error.issues)
+            res.status(401).send(error.issues)
           } else {
             res.status(500).send("Unexpected error")
           }
@@ -42,6 +42,7 @@ export class PostController{
             token: req.headers.authorization, 
             content: req.body.content 
           })
+          console.log(input)
 
           const output = await this.postBusiness.createPost(input)
           return res.status(201).send(output);
@@ -51,7 +52,7 @@ export class PostController{
           if (error instanceof BaseError) {
             res.status(error.statusCode).send(error.message)
           } else if (error instanceof ZodError) {
-            res.status(400).send(error.issues)
+            res.status(403).send(error.issues)
           } else {
             res.status(500).send("Unexpected error")
           }

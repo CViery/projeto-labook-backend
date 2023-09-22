@@ -5,16 +5,16 @@ import { SignupInputDTO, SignupOutputDTO } from "../dtos/user/signup.dto"
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { USER_ROLES, User } from "../models/User"
-import { HashManager } from "../services/HashManeger"
+import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
-import { TokenMenanger, TokenPayload } from "../services/TokenMenager"
+import { TokenMananger, TokenPayload } from "../services/TokenManager"
 
 
 export class UserBusiness {
   constructor(
     private userDatabase: UserDatabase,
     private idGenerator: IdGenerator,
-    private tokenManager: TokenMenanger,
+    private tokenManager: TokenMananger,
     private hashManager:HashManager
   ) { }
 
@@ -32,7 +32,7 @@ if(!payload){
 }
 
 if(payload?.role !== USER_ROLES.ADMIN){
-  throw new BadRequestError("Só ADMIN pode acessar essa bosta")
+  throw new BadRequestError("Só ADMIN pode acessar")
 }
 
 
